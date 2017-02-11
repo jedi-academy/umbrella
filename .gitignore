@@ -1,6 +1,11 @@
 */config/development
+*/config/production
 */logs/log-*.php
 !*/logs/index.html
 */cache/*
 !*/cache/index.html
 !*/cache/.htaccess
+/nbproject/private/
+/data/panda.sql
+/data/jlpa2671_panda.sql
+/nbproject/
