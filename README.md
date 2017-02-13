@@ -1,2 +1,2 @@
 # umbrella
-Testing &amp; deployment server for student projects
+Testing &amp; deployment server for student projects.

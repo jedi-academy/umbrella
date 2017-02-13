@@ -1,6 +1,5 @@
-pwd
+# Create a new deployable repo
 cd ~/{base}
-pwd
 mkdir {app}
 chmod {app} 755
 cd {app}
