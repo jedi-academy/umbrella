@@ -12,8 +12,8 @@ class Welcome extends Application {
 		$this->data['boxes'] = $this->metric('Boxes of parts bought', 77, 'success', 'cubes', '/boxes');
 		$this->data['parts'] = $this->metric('Parts made', 6, 'green', 'cogs', '/plants');
 		$this->data['returns'] = $this->metric('Parts returned', 23, 'info', 'recycle', '/plants');
-		$this->data['transfers'] = $this->metric('Parts transferred', 4, 'warning', 'handshake-0', '/boxes');
-		$this->data['builds'] = $this->metric('Bots built', 6, 'danger', 'industry', '/bots');
+		$this->data['transfers'] = $this->metric('Parts transferred', 4, 'warning', 'handshake-o', '/boxes');
+		$this->data['builds'] = $this->metric('Bots built', 6, 'danger', 'child', '/bots');
 		$this->data['bucks'] = $this->metric('Greed meter', 1234, 'primary', 'dollar', '/plants');
 		
 		$parms = array();
