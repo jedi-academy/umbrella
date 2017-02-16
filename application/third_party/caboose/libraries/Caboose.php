@@ -36,9 +36,14 @@ class Caboose {
             'template' => 'lightbox'
         ),
        'confirm' => array(
-            'css' => '',
+            'css' => 'morris.css',
             'js' => 'bootstrap-confirmation.js',
             'template' => 'confirm'
+        ),
+       'morris' => array(
+            'css' => '',
+            'js' => ['morris.min.js','raphael.min.js','morris-data.js'],
+            'template' => NULL
         ),
      );
     // provide for any fields they need. this should be indexed [component][field]

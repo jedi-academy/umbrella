@@ -29,6 +29,8 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav navbar-right">
                         {menubar}
+						<li><a href="#"><strong>{userName}</strong></a></li>
+
                     </ul>
                 </div><!--/.nav-collapse -->
             </div>
@@ -48,7 +50,7 @@
                     <div class="row">
 						<hr/>
                         <p class="text-center">
-							Student test &amp; deployment server for COMP4711
+							<em>Student test &amp; deployment server for COMP4711</em>
 						</p>
                     </div>
                 </div>

@@ -24,6 +24,13 @@ class Application extends CI_Controller {
 		$this->data['pagetitle'] = 'Umbrella Corp - Life Is Our Business';
 		$this->data['title'] = 'Panda Research Center';
 		$this->data['ci_version'] = (ENVIRONMENT === 'development') ? 'CodeIgniter Version <strong>' . CI_VERSION . '</strong>' : '';
+
+		// login scoop?
+		$this->data['userRole'] = ROLE_GUEST;
+		
+		$this->data['userID'] = $this->session->userdata('userID') ?? 'Guest';
+		$this->data['userName'] = $this->session->userdata('userName') ?? '';
+		$this->data['userRole'] = $this->session->userdata('userRole') ?? 'guest';
 	}
 
 	/**
@@ -48,4 +55,50 @@ class Application extends CI_Controller {
 		$this->parser->parse('theme/template', $this->data);
 	}
 
+	/**
+	 * RBAC - role-based access control.
+	 * Restrict the access of a page to only those users
+	 * who have the role specified.
+	 * 
+	 * @param string $roleNeeded 
+	 */
+	function restrict($roleNeeded = null)
+	{
+		$userRole = $this->session->userdata('userRole');
+		if ($roleNeeded != null)
+		{
+			if ($userRole != $roleNeeded)
+			{
+				redirect("/");
+				exit;
+			}
+		}
+	}
+
+	/**
+	 * Are we logged in? 
+	 */
+	function loggedin()
+	{
+		return $this->session->userdata('userID');
+	}
+
+	/**
+	 * Is the logged in user in a specific role? 
+	 */
+	function in_role($role)
+	{
+		if ($this->loggedin())
+		{
+			return ($role == $this->session->userdata('userRole'));
+		}
+	}
+
+	/**
+	 * Forced logout
+	 */
+	function logout() {
+		$this->session->sess_destroy();
+		redirect('/');
+	}
 }
