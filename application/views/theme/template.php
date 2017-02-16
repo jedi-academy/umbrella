@@ -50,7 +50,7 @@
                     <div class="row">
 						<hr/>
                         <p class="text-center">
-							Student test &amp; deployment server for COMP4711
+							<em>Student test &amp; deployment server for COMP4711</em>
 						</p>
                     </div>
                 </div>
