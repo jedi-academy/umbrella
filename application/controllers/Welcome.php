@@ -16,8 +16,15 @@ class Welcome extends Application {
 		$this->data['builds'] = $this->metric('Bots built', 6, 'danger', 'child', '/bots');
 		$this->data['bucks'] = $this->metric('Greed meter', 1234, 'primary', 'dollar', '/plants');
 		
-		$parms = array();
+		$this->caboose->needed('morris','morris-donut-chart');
+		$parms = ['donuts'=> [
+			['label'=> "Household", 'value'=> 6],
+			['label'=> "Butler", 'value'=> 12],
+			['label'=> "Companion", 'value'=> 4],
+			['label'=> "Motley", 'value'=> 30],
+ 		]];
 		$this->data['donuts'] = $this->parser->parse('donuts',$parms,true);
+		
 		$this->data['tasks'] = $this->parser->parse('tasks',$parms,true);
 		$this->data['transactions'] = $this->parser->parse('transactions',$parms,true);
 		
