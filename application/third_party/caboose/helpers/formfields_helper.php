@@ -45,6 +45,38 @@ if (!function_exists('makeTextField'))
 
 }
 
+/**
+ *  Construct a text input, with an add-on
+ * 
+ * @param string $label Descriptive label for the control
+ * @param string $name ID and name of the control; s/b the same as the RDB table column
+ * @param mixed $value Initial value for the control
+ * @param string $prefix Add-on to be styled with the control
+ * @param string $explain Help text for the control
+ * @param int $maxlen Maximum length of the value, characters
+ * @param int $size width in ems of the input control
+ * @param boolean $disabled True if non-editable
+ */
+if (!function_exists('makePrefixedField'))
+{
+
+	function makePrefixedField($label, $name, $value, $prefix='', $explain = "", $maxlen = 40, $size = 25, $disabled = false)
+	{
+		$CI = &get_instance();
+		$parms = array(
+			'label' => $label,
+			'name' => $name,
+			'value' => htmlentities($value, ENT_COMPAT, 'UTF-8'),
+			'explain' => $explain,
+			'maxlen' => $maxlen,
+			'size' => $size,
+			'disabled' => ($disabled ? 'disabled="disabled"' : ''),
+			'prefix' => $prefix
+		);
+		return $CI->parser->parse('_fields/prefixedfield', $parms, true);
+	}
+
+}
 
 /**
  * Construct a form row to edit a large field.
@@ -98,7 +130,7 @@ if (!function_exists('makeCheckbox'))
 			'name' => $name,
 			'checked' => $value ? 'checked' : '',
 			'explain' => ($explain <> "") ? $explain : $name,
-			'disabled' => ($disabled ? 'disabled="disabled"' : '')
+			'disabled' => ($disabled ? 'disabled' : '')
 		);
 		return $CI->parser->parse('_fields/checkbox', $parms, true);
 	}

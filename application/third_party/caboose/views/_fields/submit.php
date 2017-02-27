@@ -1,1 +1,1 @@
-<button type="submit" title="{title}">{label}</button>
+<button class="btn {extra}" type="submit" title="{title}">{label}</button>
