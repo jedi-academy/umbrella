@@ -8,7 +8,8 @@ class Welcome extends Application {
 	{
 		$this->data['pagebody'] = 'homepage';
 
-		$this->data['plants'] = $this->metric('Plants active', 24, 'primary', 'industry', '/plants');
+		$this->data['plants'] = $this->metric('Plants', $this->factories->size(), 'primary', 'industry', '/plants');
+		
 		$this->data['boxes'] = $this->metric('Boxes of parts bought', 77, 'success', 'cubes', '/boxes');
 		$this->data['parts'] = $this->metric('Parts made', 6, 'green', 'cogs', '/plants');
 		$this->data['returns'] = $this->metric('Parts returned', 23, 'info', 'recycle', '/plants');
