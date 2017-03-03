@@ -119,6 +119,7 @@ class Vault extends Application {
 		// validate away
 		if ($this->form_validation->run())
 		{
+			$factory->updated = date();
 			$this->factories->update($factory);
 			$this->alert('Settings updated', 'success');
 		} else
