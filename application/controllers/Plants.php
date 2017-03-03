@@ -33,9 +33,9 @@ class Plants extends Application {
 			if (!empty($record->status))
 				$task->status = $this->statuses->get($record->status)->name;
 //			$record->deployed = date_format($record->deployed,DATE_W3C);
-			$stat = $this->stats->get($record->id);
-			$record->last_made = $stat->last_made ?? 'Unknown';
-			$result .= $this->parser->parse('plantone', (array) $record, true);
+			$stat = $this->stats->get($record->id) ?? $this->stats->create();
+			$parms = array_merge((array) $record, (array) $stat);
+			$result .= $this->parser->parse('plantone', $parms, true);
 		}
 		$this->data['display_set'] = $result;
 
@@ -84,9 +84,9 @@ class Plants extends Application {
 	// take a closer look at one plant
 	function inspect($which = null)
 	{
-		
+
 		$this->data['previous_view'] = $_SERVER['HTTP_REFERER'];
-		
+
 		$record = null;
 		if ($which != null)
 			$record = $this->factories->get($which);
@@ -101,7 +101,7 @@ class Plants extends Application {
 		$record->thumbnail = $this->parser->parse($frag, (array) $record, true);
 
 		// performance
-		$performance = $this->stats->get($which);
+		$performance = $this->stats->get($which) ?? $this->stats->create();
 		$this->data = array_merge($this->data, (array) $performance);
 
 		// and away we go

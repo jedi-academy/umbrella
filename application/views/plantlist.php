@@ -3,7 +3,9 @@
 	<tr>
 		<th>Id</th>
 		<th>Deployed</th>
-		<th>Last Made</th>
+		<th>Balance</th>
+		<th># Bots Made</th>
+		<th>Last Bot Made</th>
 	</tr>
 	{display_set}
 </table>
