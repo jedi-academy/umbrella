@@ -84,6 +84,9 @@ class Plants extends Application {
 	// take a closer look at one plant
 	function inspect($which = null)
 	{
+		
+		$this->data['previous_view'] = $_SERVER['HTTP_REFERER'];
+		
 		$record = null;
 		if ($which != null)
 			$record = $this->factories->get($which);
@@ -93,6 +96,15 @@ class Plants extends Application {
 			return;
 		}
 
+		// avatar
+		$frag = empty($record->org) ? 'planticon' : 'plantavatar';
+		$record->thumbnail = $this->parser->parse($frag, (array) $record, true);
+
+		// performance
+		$performance = $this->stats->get($which);
+		$this->data = array_merge($this->data, (array) $performance);
+
+		// and away we go
 		$this->data = array_merge($this->data, (array) $record);
 		$this->data['pagebody'] = 'plant_inspect';
 		$this->render();
