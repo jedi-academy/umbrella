@@ -11,6 +11,9 @@
  */
 class Application extends CI_Controller {
 
+	protected $trader = null;	// who is asking?
+	protected $token = null;	// what token did they provide?
+	
 	/**
 	 * Constructor.
 	 * Establish view parameters & load common helpers
@@ -34,6 +37,13 @@ class Application extends CI_Controller {
 
 		$this->data['alerts'] = '';
 		$this->error_free = TRUE;
+		
+		// was a PRC session token provided?
+		$this->token = $this->input->get('token');
+		if (!empty($this->token)) {
+			$prc_session = $this->trading->get($this->token);
+			$this->trader = empty($prc_session) ? 'Bogus' : $prc_session->factory;
+		}
 	}
 
 	/**

@@ -6,16 +6,17 @@ be invoked from your browser location field, for testing.
 
 If using these under program control, 
 
-    $response = file_get_contents('https://umbrella.jlparry.com/xxx?session=zzz');
+    $response = file_get_contents('https://umbrella.jlparry.com/xxx?token=zzz');
 
 will retrieve the response to a request sent to "xxx", which
 refers to an endpoint described below, and may need additional
 parameters,
 
-The "session" query parameter is required for any request meant to be used only
+The "token" query parameter is required for any request meant to be used only
 by a bot factory app request. The value is a PRC session identifier, good for
 the current PRC trading session, and provided to you through the "registerme"
-endpoint.
+endpoint. This is different from the super secret token you use to change
+deployment settings.
 
 In all cases below, the response might be an error message instead
 of the "happy path" response shown.
@@ -118,6 +119,6 @@ Status: t.b.d.
 Purpose: Test if you have a PRC session  
 Returns: The factory name the PRC associates with your IP address  
 Used by: bot factory app  
-Status: t.b.d.
+Status: tested
 
 This should return your factory name, if you have a PRC session.
