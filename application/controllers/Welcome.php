@@ -58,7 +58,9 @@ class Welcome extends Application {
 		$this->data['donuts'] = $this->parser->parse('donuts', $parms, true);
 
 		// tasks history panel
+		$parms['activities'] = $this->activity->latest();
 		$this->data['tasks'] = $this->parser->parse('tasks', $parms, true);
+		
 		// transactions history panel
 		$this->data['transactions'] = $this->parser->parse('transactions', $parms, true);
 

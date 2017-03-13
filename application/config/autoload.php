@@ -59,7 +59,8 @@ $autoload['packages'] = array(APPPATH . 'third_party/caboose/');
   |
   |	$autoload['libraries'] = array('user_agent' => 'ua');
  */
-$autoload['libraries'] = array('parser', 'caboose', 'database', 'session', 'engine');
+$autoload['libraries'] = array('parser', 'caboose', 'database', 'session', 
+	'engine', 'parsedown');
 
 /*
   | -------------------------------------------------------------------
@@ -90,7 +91,7 @@ $autoload['drivers'] = array();
   |
   |	$autoload['helper'] = array('url', 'file');
  */
-$autoload['helper'] = array('url');
+$autoload['helper'] = array('url', 'prc');
 
 /*
   | -------------------------------------------------------------------
@@ -133,4 +134,5 @@ $autoload['language'] = array();
   |
   |	$autoload['model'] = array('first_model' => 'first');
  */
-$autoload['model'] = array('factories', 'stats', 'series');
+$autoload['model'] = array('factories', 'stats', 'series', 'properties', 
+	'parts', 'history', 'activity');

@@ -45,18 +45,13 @@ class Application extends CI_Controller {
 		$logstate = (empty($this->data['userName'])) ? 'notloggedin' : 'loggedin';
 		$this->data['menubar'] = $this->parser->parse('theme/' . $logstate, $this->data, true);
 
-//		$choices = $this->config->item('menu_choices');
-//		foreach ($choices['menudata'] as &$menuitem)
-//		{
-//			$menuitem['active'] = (ltrim($menuitem['link'], '/ ') == uri_string()) ? 'active' : '';
-//		}
-//		$this->data['menubar'] = $this->parser->parse('theme/menubar', $choices, true);
 		// integrate any needed CSS framework & components
 		$this->data['caboose_styles'] = $this->caboose->styles();
 		$this->data['caboose_scripts'] = $this->caboose->scripts();
 		$this->data['caboose_trailings'] = $this->caboose->trailings();
 
-		$this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
+		if (empty($this->data['content']))
+			$this->data['content'] = $this->parser->parse($this->data['pagebody'], $this->data, true);
 		$this->parser->parse('theme/template', $this->data);
 	}
 
