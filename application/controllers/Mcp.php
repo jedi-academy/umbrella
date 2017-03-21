@@ -10,24 +10,26 @@ class Mcp extends Application {
 	// default entry point
 	public function index()
 	{
-		echo 'Go away.';		
+		echo 'Go away.';
 	}
-	
+
 	// restart everything
-	function bankrupt($token = 'bogus') {
+	function bankrupt($token = 'bogus')
+	{
 		// make sure this request is authorized
 		$required = $this->properties->get('potd');
-		if ($token != $required) redirect ('/');
-		
+		if ($token != $required)
+			redirect('/');
+
 		// establish zulu time
 		$zulu = date('Y-m-d H:i:s.');
-		$this->properties->put('zulu',$zulu);
-		
+		$this->properties->put('zulu', $zulu);
+
 		// reset stats
 		$records = $this->stats->all();
-		foreach ($records as $record) {
-			$record->balance = 
-					$this->properties->get('ante');
+		foreach ($records as $record)
+		{
+			$record->balance = $this->properties->get('ante');
 			$record->boxes_bought = 0;
 			$record->parts_returned = 0;
 			$record->parts_made = 0;
@@ -39,7 +41,7 @@ class Mcp extends Application {
 		$this->parts->truncate();
 		$this->history->truncate();
 		$this->activity->truncate();
-		
+
 		// and finally the sessions
 		$this->db->truncate('ci_sessions');
 		redirect('/');

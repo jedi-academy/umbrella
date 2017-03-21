@@ -1,8 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Whoami extends Application {
+class Verify extends Application {
 
 	// constructor
 	function __construct()

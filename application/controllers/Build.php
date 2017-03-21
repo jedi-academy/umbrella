@@ -1,8 +1,6 @@
 <?php
 
-defined('BASEPATH') OR exit('No direct script access allowed');
-
-class Whoami extends Application {
+class Build extends Application {
 
 	// constructor
 	function __construct()
@@ -10,7 +8,7 @@ class Whoami extends Application {
 		parent::__construct();
 	}
 
-	// Identification service
+	// Build more parts
 	public function index()
 	{
 		$result = empty($this->trader) ? "Bogus" : $this->trader;

@@ -26,7 +26,7 @@ of the "happy path" response shown.
 Purpose: purchase a box of random parts for this factory to use  
 Returns: an array of parts certificates, in JSON format  
 Used by: bot factory app  
-Status: t.b.d.
+Status: beta
 
 Each box contains 10 random bot parts.
 The purchase price of $100 per box is deducted from your factory's balance.
@@ -61,7 +61,7 @@ The certificates for any pieces "consumed" will be voided.
 Purpose: Destroy your plants' PRC trading session  
 Returns: Ok (or not)  
 Used by: bot factory app  
-Status: t.b.d.
+Status: alpha
 
 Your factory will then need to "register" again
 
@@ -70,7 +70,7 @@ Your factory will then need to "register" again
 Purpose: Identify a factory's job  
 Returns: The specific part that a factory is manufacturing during the current trading session  
 Used by: browser or bot factory app  
-Status: t.b.d.
+Status: beta
 
 Use this for debugging, at the moment.
 

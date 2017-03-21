@@ -17,7 +17,7 @@ class Activity extends MY_Model {
 	function record($factory, $action)
 	{
 		// prune the table if needed
-		$size = size();
+		$size = $this->size();
 		if ($size >= $this->activity_limit)
 		{
 			// drop the oldest

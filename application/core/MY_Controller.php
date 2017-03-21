@@ -37,8 +37,9 @@ class Application extends CI_Controller {
 
 		$this->data['alerts'] = '';
 		$this->error_free = TRUE;
-		
+			
 		// was a PRC session token provided?
+		$this->trader = NULL;
 		$this->token = $this->input->get('token');
 		if (!empty($this->token)) {
 			$prc_session = $this->trading->get($this->token);
