@@ -71,12 +71,14 @@ class Engine {
 	// Make a new part
 	private function buildapart($factory = 'Bogus')
 	{
+		$pieces = [1,2,3];
 		$part = $this->CI->parts->create();
 		//fixme check for duplicates
 		$part->id = $this->randomToken();
 		$part->plant = $factory;
 		$part->model = $this->pool[array_rand($this->pool)];
-		$part->piece = array_rand(['1', '2', '3']);
+		$part->piece = $pieces[array_rand($pieces)];
+		$part->stamp = 
 		$this->CI->parts->add($part);
 		return $part;
 	}
