@@ -40,10 +40,10 @@ class Application extends CI_Controller {
 			
 		// was a PRC session token provided?
 		$this->trader = NULL;
-		$this->token = $this->input->get('token');
+		$this->token = $this->input->get('key');
 		if (!empty($this->token)) {
 			$prc_session = $this->trading->get($this->token);
-			$this->trader = empty($prc_session) ? 'Bogus' : $prc_session->factory;
+			$this->trader = empty($prc_session) ? '' : $prc_session->factory;
 		}
 	}
 

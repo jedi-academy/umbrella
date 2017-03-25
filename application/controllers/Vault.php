@@ -80,7 +80,7 @@ class Vault extends Application {
 	}
 
 	// Convert plaintext token into hash, for better security
-	function harden($factory)
+	private function harden($factory)
 	{
 		$factory->token = password_hash($factory->token, PASSWORD_DEFAULT);
 		$this->factories->update($factory);
@@ -119,7 +119,7 @@ class Vault extends Application {
 		// validate away
 		if ($this->form_validation->run())
 		{
-			$factory->updated = date();
+			$factory->updated = date('Y-m-d H:i:s.');
 			$this->factories->update($factory);
 			$this->alert('Settings updated', 'success');
 		} else

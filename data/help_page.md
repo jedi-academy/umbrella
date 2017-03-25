@@ -34,7 +34,6 @@ might reasonably use them.
 
 Purpose: Establish a trading session on PRC for your factory  
 Returns: "Ok KEY", where KEY is your API key, or an error message
-Status: t.b.d.
 
 Create an API key for your authenticated factory.
 Without an API key, you cannot request any state-changing
@@ -60,7 +59,6 @@ inside your <em>data</em> folder.
 
 Purpose: purchase a box of random parts for your factory to use  
 Returns: an array of parts certificates, in JSON format, or else an error message.  
-Status: beta
 
 Each box contains 10 random bot parts.
 The purchase price of $100 per box is deducted from your factory's balance.
@@ -70,7 +68,6 @@ The purchase price of $100 per box is deducted from your factory's balance.
 
 Purpose: Requests any newly built parts for this factory  
 Returns: an array of parts certificates, in JSON format  
-Status: t.b.d.
 
 Each bot factory makes one specific part during a business cycle of the PRC.
 The factory gets to "make" one part every 10 seconds. This method creates
@@ -86,7 +83,6 @@ There is no cost to your factory for these parts.
 Purpose: Ask the PRC to recycle up to three parts that you do not want  
 Parameters: the certificate codes for the parts that comprise your bot  
 Returns: "Ok AMOUNT" (where AMOUNT is the value credited to your account balance) or an error message  
-Status: t.b.d.
 
 The PRC will automatically credit your factory's balance, if the request
 checks out.
@@ -97,7 +93,6 @@ The certificates for any pieces "consumed" will be voided.
 Purpose: Ask the PRC to buy an assembled bot from you  
 Parameters: the certificate codes for the three parts that comprise your bot  
 Returns: "Ok AMOUNT" (where AMOUNT is the value credited to your account balance) or an error message  
-Status: t.b.d.
 
 The PRC will automatically credit your account balance, if the request checks out.
 The certificates for any pieces "consumed" will be voided.
@@ -106,7 +101,6 @@ The certificates for any pieces "consumed" will be voided.
 
 Purpose: Restart your bot factory's participation in the current trading session  
 Returns: "Ok AMOUNT" (where AMOUNT is the starting balance assigned to you) or an error message  
-Status: t.b.d.
 
 If successful, any parts certificates assigned to your factory will be voided,
 and your balance will be reset to the starting amount, i.e. $1000.
@@ -118,7 +112,6 @@ Use this service if your app or its database get messed up for any reason.
 
 Purpose: Destroy your plants' PRC trading session  
 Returns: "Ok" or an error message  
-Status: alpha
 
 Your API Key is invalidated, as well as any parts certificates you held, and
 your balance is reset to zero. Your factory will need to "register" again
@@ -149,14 +142,12 @@ the URL to put into your browser's location field, with "xxx" set per the follow
 Purpose: Ask for the balance that a factory has  
 Parameters: TEAM is the factory name  
 Returns: "Ok AMOUNT" (where AMOUNT is the current balance for that factory) or an error message  
-Status: t.b.d.
 
 ### /info/scoop/TEAM
 
 Purpose: Get the scoop on a factory  
 Parameters: TEAM is the factory name  
 Returns: the public data known about a factory, or else an error message  
-Status: t.b.d.
 
 Use this to see what the PRC thinks a given factory has, in terms
 of its balance and the parts it has on hand.
@@ -166,21 +157,18 @@ of its balance and the parts it has on hand.
 Purpose: Identify a part  
 Parameters: CACODE is a certificate authentication code  
 Returns: the data known about a part, identified by its certificate token value  
-Status: t.b.d.
 
 ### /info/whomakes/PARTTYPE
 
 Purpose: Identify the factories building a specific part  
 Parameters: PARTTYPE is a two-letter part type (model and piece)  
 Returns: A list of the factories making the designated part  
-Status: t.b.d.
 
 ### /info/whoami?key=APIKEY
 
 Purpose: Test if you have a PRC session  
 Parameters: APIKEY is a factory's API key  
 Returns: The factory name the PRC associates with your API key  
-Status: t.b.d.
 
 This should return your factory name, if you have a PRC session.  
 
@@ -194,10 +182,8 @@ Purpose: Identify a factory's job
 Parameters: TEAM is the factory name  
 Returns: The specific part that a factory is manufacturing during the current trading session,
 or an error message  
-Status: t.b.d.
 
 ### /info/teams
 
 Purpose: List the participating factories  
 Returns: A list of active factories, or else an error message  
-Status: t.b.d.

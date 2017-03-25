@@ -68,28 +68,140 @@ class Engine {
 		return $result;
 	}
 
+	// Fulfill entitlement
+	function fulfill($factory)
+	{
+		$timePerPart = 10;
+		$result = array();
+		if (!$this->init)
+			$this->initialize();
+
+		// how many are they entitled to?
+		$stat = $this->CI->stats->get($factory);
+		$then = $stat->last_made;
+		$now = new DateTime;
+		$ago = new DateTime($then);
+		$diff = $now->diff($ago);
+
+		$elapsed = $diff->s + (60 * $diff->i);
+		$eligible = min(floor($elapsed / $timePerPart), 10);
+
+		for ($i = 0; $i < $eligible; $i++)
+		{
+			$result[] = $this->buildapart($factory);
+		}
+
+		return $result;
+	}
+
+	// Calculate entitlement
+	function eligible($factory)
+	{
+		$timePerPart = 10;
+
+		// how many are they entitled to?
+		$stat = $this->CI->stats->get($factory);
+		$then = $stat->last_made;
+		$now = new DateTime;
+		$ago = new DateTime($then);
+		$diff = $now->diff($ago);
+
+		$elapsed = $diff->s + (60 * $diff->i);
+		$eligible = min(floor($elapsed / $timePerPart), 10);
+
+		return $eligible;
+	}
+
 	// Make a new part
 	private function buildapart($factory = 'Bogus')
 	{
-		$pieces = [1,2,3];
+		$pieces = [1, 2, 3];
 		$part = $this->CI->parts->create();
 		//fixme check for duplicates
 		$part->id = $this->randomToken();
 		$part->plant = $factory;
 		$part->model = $this->pool[array_rand($this->pool)];
 		$part->piece = $pieces[array_rand($pieces)];
-		$part->stamp = 
+		$part->stamp = date('Y-m-d H:i:s.');
 		$this->CI->parts->add($part);
 		return $part;
 	}
 
+	// Recycle a part
+	function recycle($factory, $part)
+	{
+		$refund = 0;
+		$record = $this->CI->parts->get($part);
+		if (!empty($record) && ($record->plant == $factory))
+		{
+			$this->CI->parts->delete($part);
+			$refund = 5;
+		}
+
+		return $refund;
+	}
+
+	// Choose a part for a factory to make
+	function pickapart()
+	{
+		if (!$this->init)
+			$this->initialize();
+		$pieces = [1, 2, 3];
+		return $this->pool[array_rand($this->pool)] . $pieces[array_rand($pieces)];
+	}
+
 	// come up with a random token
-	private function randomToken()
+	function randomToken()
 	{
 		$token = random_int(1000000, 5000000);
 		// compute its hex representation
 		$hex = dechex($token);
 		return $hex;
+	}
+
+		// Buy a bot
+	function buymybot($part1, $part2, $part3)
+	{
+		$credit = 0;
+		
+		// retrieve the pieces
+		$piece1 = $this->CI->parts->get($part1);
+		$piece2 = $this->CI->parts->get($part2);
+		$piece3 = $this->CI->parts->get($part3);
+		
+		$model1 = $piece1->model;
+		$model2 = $piece2->model;
+		$model3 = $piece3->model;
+		
+		$series1 = $this->checkSeries($model1);
+		$series2 = $this->checkSeries($model2);
+		$series3 = $this->checkSeries($model3);
+		
+		// calculate the bot price
+		$price = 25;
+		if (($series1 == $series2) && ($series1 == $series3)) {
+			// they are in the same series
+			$series = $this->CI->series->get($series1);
+			if (($model1 == $model2) && ($model1 == $model3))
+				$price = $series->value;
+			else $price = $series->value / 2;
+		}
+		
+		// recycle the pieces
+		$this->CI->parts->delete($part1);
+		$this->CI->parts->delete($part2);
+		$this->CI->parts->delete($part3);
+
+		return $price;
+	}
+
+	// which series is a model from?
+	private function checkSeries($model) {
+		foreach($this->CI->series->all() as $series) {
+			if (($model >= $series->starts) && ($model <= $series->ends))
+				return $series->code;
+		}
+		return 0;
 	}
 
 }
