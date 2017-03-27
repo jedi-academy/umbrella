@@ -31,6 +31,7 @@ class Activity extends MY_Model {
 		$record = $this->create();
 		$record->factory = $factory;
 		$record->action = $action;
+		$record->timestamp = date('Y-m-d H:i:s.');
 		$this->add($record);
 	}
 
