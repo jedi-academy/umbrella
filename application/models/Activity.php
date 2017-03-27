@@ -22,9 +22,11 @@ class Activity extends MY_Model {
 		{
 			// drop the oldest
 			$drop_count = $size - $this->activity_limit + 1;
-			$oldest = $this->first($drop_count);
-			foreach ($oldest as $record)
-				$this->delete($record->seq);
+			for ($i = 0; $i < $drop_count; $i++)
+			{
+				$oldest = $this->first();
+				$this->delete($oldest->seq);
+			}
 		}
 
 		// create & add new activity record

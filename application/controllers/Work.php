@@ -155,6 +155,7 @@ class Work extends CI_Controller {
 		$this->stats->update($stat);
 
 		$this->activity->record($this->trader, 'bought a box of parts');
+		$this->history->record($this->trader,'Parts bought',10, -100);
 		echo json_encode($result);
 	}
 
@@ -243,8 +244,10 @@ class Work extends CI_Controller {
 		$this->stats->update($stat);
 
 		if ($count > 0)
+		{
 			$this->activity->record($this->trader, 'returned ' . $count . ' parts');
-
+			$this->history->record($this->trader, 'Parts recycled', $count, $refund);
+		}
 		echo 'Ok ' . $refund;
 //		echo $this->engine->eligible($this->trader);
 	}
@@ -295,6 +298,7 @@ class Work extends CI_Controller {
 		$this->stats->update($stat);
 
 		$this->activity->record($this->trader, 'sold us a bot');
+		$this->history->record($this->trader,'Bot sold',1, $result);
 
 		echo 'Ok ' . $result;
 	}
