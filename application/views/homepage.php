@@ -10,10 +10,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 <div class="row">
 	{plants}
-	{boxes}
 	{parts}
-	{returns}
-	{transfers}
 	{builds}
 	{bucks}
 </div>
