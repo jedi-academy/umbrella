@@ -53,37 +53,35 @@ class Production extends Application {
 	{
 		$this->data['pagebody'] = 'breakdown';
 
-		echo 'BREAKDOWN ... ';
 		// extract & summarize #'s
 		$summary = array();
 		$total = ['total_quantity' => 0, 'total_amount' => 0];
-		foreach ($this->series as $record)
+		foreach ($this->series->all() as $record)
 		{
-			echo $record->code . ': '.$record->description.'    ';
-//			$group = ['series' => $record->description ?? 'None', 'quantity' => 0, 'amount' => 0];
-//			foreach ($this->boblog->all() as $one)
-//			{
-//				echo $record->series . ' / '.$one->series.'     ';
-//				if ($one->series == $record->code)
-//				{
-//					$group['quantity'] ++;
-//					$group['amount'] += $one->price;
-//				}
-//			}
-//			$total['total_quantity'] += $group['quantity'];
-//			$total['total_amount'] += $group['amount'];
-//			if ($group['quantity'] > 0)
-//				$group['amount'] /= $group['quantity'];
-//			$summary[] = $group;
+			$group = ['series' => $record->description ?? 'None', 'quantity' => 0, 'amount' => 0];
+			foreach ($this->boblog->all() as $one)
+			{
+				if ($one->series == $record->code)
+				{
+					$group['quantity'] ++;
+					$group['amount'] += $one->price;
+				}
+			}
+			// accumulate totals
+			$total['total_quantity'] += $group['quantity'];
+			$total['total_amount'] += $group['amount'];
+			// adjust group summary data for presentation
+			if ($group['quantity'] > 0)
+				$group['amount'] /= $group['quantity'];
+			$summary[] = $group;
 		}
-//		$this->data['breaking'] = $summary;
-//		
-//		// calc totals
-//		if ($total['total_quantity'] > 0)
-//			$total['total_amount'] /= $total['total_quantity'];
-//		$this->data = array_merge($this->data,$total);
+		$this->data['breaking'] = $summary;
 
-		die();
+		// adjust totals for presentation
+		if ($total['total_quantity'] > 0)
+			$total['total_amount'] /= $total['total_quantity'];
+		$this->data = array_merge($this->data, $total);
+
 		$this->render();
 	}
 
