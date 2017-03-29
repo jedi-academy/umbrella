@@ -42,6 +42,7 @@ class Mcp extends Application {
 		$this->history->truncate();
 		$this->activity->truncate();
 		$this->boblog->truncate();
+		$this->trading->truncate();
 
 		// and finally the sessions
 		$this->db->truncate('ci_sessions');

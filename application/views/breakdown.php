@@ -1,11 +1,20 @@
+<h2>Bots Built Breakdown</h2>
 <table class="table">
 	<tr>
-		<th>Origin</th>
-		<th>Quantity</th>
+		<th>Series</th>
+		<th># Built</th>
+		<th>Average Price</th>
 	</tr>
-	<tr><td>Bought in boxes</td><td>{bought}</td></tr>
-	<tr><td>Factory-produced</td><td>{made}</td></tr>
-	<tr><td>Returned for recycling</td><td>{returned}</td></tr>
-	<tr><td>Consumed for bots</td><td>{consumed}</td></tr>
-	<tr><th>Net balance:</th><th>{balance}</th></tr>
+	{breaking}
+	<tr>
+		<td>{series}</td>
+		<td>{quantity}</td>
+		<td>{amount}</td>
+	</tr>
+	{/breaking}
+	<tr>
+		<th>This trading cycle</th>
+		<th>{total_quantity}</th>
+		<th>{total_amount}</th>
+	</tr>
 </table>

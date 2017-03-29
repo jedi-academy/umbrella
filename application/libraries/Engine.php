@@ -187,12 +187,13 @@ class Engine {
 
 		// data for logging
 		$price = 25;
-		$series = 0;
+		$seriescode = 0;
 		$bot = $piece1->model . $piece2->model . $piece3->model;
 				
 		// calculate the bot price
 		if (($series1 == $series2) && ($series1 == $series3))
 		{
+			$seriescode = $series1;
 			// they are in the same series
 			$series = $this->CI->series->get($series1);
 			if (($model1 == $model2) && ($model1 == $model3))
@@ -201,7 +202,7 @@ class Engine {
 				$price = $series->value / 2;
 		}
 
-		$this->CI->boblog->record($this->CI->trader, $bot, $series, $price);
+		$this->CI->boblog->record($this->CI->trader, $bot, $seriescode, $price);
 				
 		// recycle the pieces
 		$this->CI->parts->delete($part1);

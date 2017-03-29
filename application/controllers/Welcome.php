@@ -34,7 +34,8 @@ class Welcome extends Application {
 		$this->data['parts'] = $this->metric('Certified parts in stock', $total_certs, 'success', 'cubes', '/production/parts', $making_plants . ' factories involved');
 
 		// builds gauge
-		$this->data['builds'] = $this->metric('Bots built', 6, 'warning', 'child', '/production/bots');
+		$this->data['builds'] = $this->metric('Bots built', $this->boblog->size(), 'warning', 'child', '/production/bots');
+		
 		// greed gauge
 		$this->data['bucks'] = $this->metric('Greed meter', 1234, 'danger', 'dollar', '/production/greed');
 

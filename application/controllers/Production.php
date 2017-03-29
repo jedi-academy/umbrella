@@ -2,8 +2,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Production extends Application
-{
+class Production extends Application {
 
 	// constructor
 	public function __construct()
@@ -14,9 +13,10 @@ class Production extends Application
 	}
 
 	// dummy entry point?
-	function index() {
+	function index()
+	{
 		$this->data['pagebody'] = 'coming_soon';
-		$this->render(); 
+		$this->render();
 	}
 
 	// present parts summary stats
@@ -25,23 +25,27 @@ class Production extends Application
 		$this->data['pagebody'] = 'production';
 
 		// extract production #'s
-		$bought = 0; $returned = 0; $made = 0; $consumed = 0;
-		foreach($this->thestats as $record) {
+		$bought = 0;
+		$returned = 0;
+		$made = 0;
+		$consumed = 0;
+		foreach ($this->thestats as $record)
+		{
 			$bought += 10 * $record->boxes_bought;
 			$returned += $record->parts_returned;
 			$made += $record->parts_made;
 			$consumed += 3 * $record->bots_built;
 		}
 		$balance = $bought + $made - $returned - $consumed;
-		
+
 		// parts gauge
 		$this->data['bought'] = $bought;
 		$this->data['returned'] = $returned;
 		$this->data['made'] = $made;
 		$this->data['consumed'] = $consumed;
 		$this->data['balance'] = $balance;
-		
-		$this->render(); 
+
+		$this->render();
 	}
 
 	// present bots production summary 
@@ -49,50 +53,67 @@ class Production extends Application
 	{
 		$this->data['pagebody'] = 'breakdown';
 
-		// extract production #'s
-		$bought = 0; $returned = 0; $made = 0; $consumed = 0;
-		foreach($this->thestats as $record) {
-			$bought += 10 * $record->boxes_bought;
-			$returned += $record->parts_returned;
-			$made += $record->parts_made;
-			$consumed += 3 * $record->bots_built;
+		echo 'BREAKDOWN ... ';
+		// extract & summarize #'s
+		$summary = array();
+		$total = ['total_quantity' => 0, 'total_amount' => 0];
+		foreach ($this->series as $record)
+		{
+			echo $record->code . ': '.$record->description.'    ';
+//			$group = ['series' => $record->description ?? 'None', 'quantity' => 0, 'amount' => 0];
+//			foreach ($this->boblog->all() as $one)
+//			{
+//				echo $record->series . ' / '.$one->series.'     ';
+//				if ($one->series == $record->code)
+//				{
+//					$group['quantity'] ++;
+//					$group['amount'] += $one->price;
+//				}
+//			}
+//			$total['total_quantity'] += $group['quantity'];
+//			$total['total_amount'] += $group['amount'];
+//			if ($group['quantity'] > 0)
+//				$group['amount'] /= $group['quantity'];
+//			$summary[] = $group;
 		}
-		$balance = $bought + $made - $returned - $consumed;
-		
-		// parts gauge
-		$this->data['bought'] = $bought;
-		$this->data['returned'] = $returned;
-		$this->data['made'] = $made;
-		$this->data['consumed'] = $consumed;
-		$this->data['balance'] = $balance;
-		
-		$this->render(); 
+//		$this->data['breaking'] = $summary;
+//		
+//		// calc totals
+//		if ($total['total_quantity'] > 0)
+//			$total['total_amount'] /= $total['total_quantity'];
+//		$this->data = array_merge($this->data,$total);
+
+		die();
+		$this->render();
 	}
 
-		// present income statement summary data
+	// present income statement summary data
 	public function greed()
 	{
 		$this->data['pagebody'] = 'income_stmt';
 
 		// extract production #'s
-		$bought = 0; $returned = 0; $made = 0; $consumed = 0;
-		foreach($this->thestats as $record) {
+		$bought = 0;
+		$returned = 0;
+		$made = 0;
+		$consumed = 0;
+		foreach ($this->thestats as $record)
+		{
 			$bought += 10 * $record->boxes_bought;
 			$returned += $record->parts_returned;
 			$made += $record->parts_made;
 			$consumed += 3 * $record->bots_built;
 		}
 		$balance = $bought + $made - $returned - $consumed;
-		
+
 		// parts gauge
 		$this->data['bought'] = $bought;
 		$this->data['returned'] = $returned;
 		$this->data['made'] = $made;
 		$this->data['consumed'] = $consumed;
 		$this->data['balance'] = $balance;
-		
-		$this->render(); 
-	}
 
+		$this->render();
+	}
 
 }
