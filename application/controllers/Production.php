@@ -90,27 +90,23 @@ class Production extends Application {
 	{
 		$this->data['pagebody'] = 'income_stmt';
 
-		// extract production #'s
-		$bought = 0;
-		$returned = 0;
-		$made = 0;
-		$consumed = 0;
+		$details = array();
+		$total = 0;
+		$ante = $this->properties->get('ante');
 		foreach ($this->thestats as $record)
 		{
-			$bought += 10 * $record->boxes_bought;
-			$returned += $record->parts_returned;
-			$made += $record->parts_made;
-			$consumed += 3 * $record->bots_built;
+			if (!empty($record->making)) {
+				$total += $record->balance - $ante;
+				$details[] = [
+					'factory' => $record->id,
+					'bots' => $record->bots_built,
+					'bucks' => $record->balance
+				];
+			}
 		}
-		$balance = $bought + $made - $returned - $consumed;
 
-		// parts gauge
-		$this->data['bought'] = $bought;
-		$this->data['returned'] = $returned;
-		$this->data['made'] = $made;
-		$this->data['consumed'] = $consumed;
-		$this->data['balance'] = $balance;
-
+		// greed gauge
+		$this->data['details'] = $details;
 		$this->render();
 	}
 
