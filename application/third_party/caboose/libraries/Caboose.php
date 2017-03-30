@@ -42,7 +42,7 @@ class Caboose {
         ),
        'morris' => array(
             'css' => '',
-            'js' => ['morris.min.js','raphael.min.js','morris-data.js'],
+            'js' => ['morris.min.js','raphael.min.js'],
             'template' => NULL
         ),
      );

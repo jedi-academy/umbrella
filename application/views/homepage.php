@@ -16,7 +16,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div>
 
 <div class="row">
-	{donuts}
+	{donutchart}
 	{tasks}
 	{transactions}
 </div>

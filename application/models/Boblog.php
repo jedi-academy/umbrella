@@ -34,4 +34,28 @@ class Boblog extends MY_Model {
 		return $result;
 	}
 
+	// provide a breakout for the donut chart
+	function breakout()
+	{
+		$count = array();
+		// basic breakout
+		foreach ($this->all() as $record)
+		{
+			if (empty($count[$record->series]))
+			{
+				$count[$record->series] = 1;
+			} else
+				$count[$record->series] ++;
+		}
+
+		// and summarize for presentation
+		$result = array();
+		foreach ($this->series->all() as $record)
+		{
+			$index = $record->code;
+			$result[] = ['label' => $this->series->get($index)->description, 'value' => $count[$index] ?? 0];
+		}
+		return $result;
+	}
+
 }

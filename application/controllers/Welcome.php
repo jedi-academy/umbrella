@@ -39,15 +39,11 @@ class Welcome extends Application {
 		// greed gauge
 		$this->data['bucks'] = $this->metric('Greed meter', 1234, 'danger', 'dollar', '/production/greed');
 
-		// bots breakdown chart
+		// bots breakdown donut chart
 		$this->caboose->needed('morris', 'morris-donut-chart');
-		$parms = ['donuts' => [
-				['label' => "Household", 'value' => 6],
-				['label' => "Butler", 'value' => 12],
-				['label' => "Companion", 'value' => 4],
-				['label' => "Motley", 'value' => 30],
-		]];
-		$this->data['donuts'] = $this->parser->parse('donuts', $parms, true);
+		$parms = ['donuts' => $this->boblog->breakout(), 'field'=>'morris-donut-chart'];
+		$this->data['donutchart'] = $this->parser->parse('donutchart', $parms, true);
+		$this->data['zzz'] = $this->parser->parse('_components/morris-data', $parms, true);
 
 		// tasks history panel
 		$parms['activities'] = $this->activity->latest();

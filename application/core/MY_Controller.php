@@ -35,6 +35,7 @@ class Application extends CI_Controller {
 		$this->data['userName'] = $this->session->userdata('userName') ?? '';
 		$this->data['userRole'] = $this->session->userdata('userRole') ?? 'guest';
 
+		$this->data['zzz'] = '';
 		$this->data['alerts'] = '';
 		$this->error_free = TRUE;
 			
