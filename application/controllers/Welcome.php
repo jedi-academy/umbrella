@@ -37,11 +37,12 @@ class Welcome extends Application {
 		$this->data['donutchart'] = $this->parser->parse('donutchart', $parms, true);
 		$this->data['zzz'] = $this->parser->parse('_components/morris-data', $parms, true);
 
-		// tasks history panel
+		// tasks activity panel
 		$parms['activities'] = $this->activity->latest();
 		$this->data['tasks'] = $this->parser->parse('tasks', $parms, true);
 
 		// transactions history panel
+		$parms['details'] = $this->history->latest();
 		$this->data['transactions'] = $this->parser->parse('transactions', $parms, true);
 
 		$this->render();
